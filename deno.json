@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "https://esm.sh/react@18.0.0"
+  },
+  "tasks": {
+    "start": "deno task dev",
+    "dev": "deno run -A --unstable https://deno.land/x/lume@v1.8.0/cli.ts --config=lume.js --serve",
+    "build": "deno run -A --unstable https://deno.land/x/lume@v1.8.0/cli.ts --config=lume.js"
+  }
+}
