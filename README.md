@@ -6,7 +6,7 @@ A really basic static-site converting Oni's feed into a page using [Deno](https:
 
 1. [Install Deno](https://deno.land/manual/getting_started/installation).
 2. Run `deno task build` to generate the site, or `deno task dev` for a live local preview
-4. Customize the page generation at `src/index.tmpl.js`, should be somewhat self-explanatory
+4. Customize the page generation at [`src/index.tmpl.js`](src/index.tmpl.js), should be somewhat self-explanatory
 
 ## Deploy
 
