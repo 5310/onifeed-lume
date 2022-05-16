@@ -12,7 +12,7 @@ jobs:
           deno-version: vx.x.x
       - name: Run Lume
         run:  deno task build
-      - name: Deploy
+      - name: Deploy site
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
