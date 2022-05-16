@@ -12,10 +12,10 @@ const article = (entry) => html`
           </time>
         </td>
       </tr>
-      <tr>
-        <th>Author</th>
-        <td>${entry.author?.name ?? 'Unknown'}</td>
-      </tr>
+//       <tr>
+//         <th>Author</th>
+//         <td>${entry.author?.name ?? 'Unknown'}</td>
+//       </tr>
     </table>
     <summary>${md(entry.content.value)}</summary>
   </article>
