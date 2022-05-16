@@ -1,6 +1,6 @@
 # Onifeed Lume
 
-A really basic static-side converting Oni's feed into a page using [Deno](https://deno.land/) and [Lume](https://lume.land/).
+A really basic static-site converting Oni's feed into a page using [Deno](https://deno.land/) and [Lume](https://lume.land/).
 
 ## Develop
 
