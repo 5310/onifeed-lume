@@ -1,6 +1,9 @@
-# Onifeed Lume
+# onnyyonn//feed
 
-A really basic static-site converting Oni's feed into a page using [Deno](https://deno.land/) and [Lume](https://lume.land/).
+Feed is my personal link-sharing site, built using [Onifeed Lume](https://github.com/5310/onifeed-lume). It converts an RSS/Atom feed to a minimal static site.
+- Visit https://onnyyonn.github.io/feed to read the feed.
+- Add https://onnyyonn.github.io/feed/feed.atom in your feed reader to get updates.
+
 
 ## Develop
 
