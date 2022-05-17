@@ -9,18 +9,13 @@ const article = (entry) => {
 
   return html`
     <article class="article-entry" id="${slug}">
-      <h1>
-        <a
-          class="article--permalink lni lni-link"
-          href="#${slug}"
-          rel="noopener noreferrer"
-        ></a>
-        <a href="${link}">${title}</a>
-      </h1>
-      <p class="lead">
-        <time datetime="${timestamp.toISOString()}">
-          ${timestamp.toISOString().substring(0, 10)}
-        </time>
+      <h1><a href="${link}">${title}</a></h1>
+      <p class="article-entry--lead">
+        <a href="#${slug}" rel="noopener noreferrer">
+          <time datetime="${timestamp.toISOString()}">
+            ${timestamp.toISOString().substring(0, 10)}
+          </time>
+        </a>
       </p>
       <summary>${md(entry.content.value)}</summary>
     </article>
@@ -116,17 +111,10 @@ const style = html`
       place-items: stretch;
     }
 
-    .article-entry .article--permalink {
-      font-size: 0.75em;
-      float: left;
-      margin-top: 0.33em;
-      margin-left: -1.4em;
-      font-weight: bold;
-      opacity: 25%;
-    }
     .article-entry .article-entry--lead {
-      font-style: italic;
       font-size: 0.85em;
+      font-weight: 500;
+      font-style: italic;
       opacity: 75%;
     }
     .article summary a {
@@ -191,7 +179,6 @@ export default async function (_) {
             <a
               class="lni lni-github"
               href="https://github.com/onnyyonn/feed"
-              style="color:#eceff4;"
               target="_blank"
               rel="noopener noreferrer"
             ></a>
