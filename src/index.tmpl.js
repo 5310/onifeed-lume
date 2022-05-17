@@ -3,7 +3,7 @@ import { html, md, fetchFeed } from './util.js'
 const article = (entry) => html`
   <article>
     <h1><a href="${entry.links[0].href}">${entry.title.value}</a></h1>
-    <i><time datetime="${entry.updated.toISOString()}">${entry.updated.toISOString().substring(0, 10)}</time></i>
+    <p style="color:#d8dee9"><font size="-0.4"><i><time datetime="${entry.updated.toISOString()}">${entry.updated.toISOString().substring(0, 10)}</time></i></font></p>
     <summary>${md(entry.content.value)}</summary>
   </article>
 `
@@ -19,13 +19,13 @@ const style = html`
       line-height: 1.5;
     }
     .header-container {
+      width: 100%;
       margin: 0 auto;
     }
     .header-title {
       font-size: 32px;
       font-weight: bold;
       margin: 0;
-      padding-bottom: 14px;
     }
     a {
       text-decoration: none;
