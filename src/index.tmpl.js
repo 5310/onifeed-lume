@@ -3,8 +3,7 @@ import { html, md, fetchFeed } from './util.js'
 const article = (entry) => html`
   <article>
     <h1><a href="${entry.links[0].href}">${entry.title.value}</a></h1>
-    <time datetime="${entry.updated.toISOString()}">
-            ${entry.updated.toLocaleDateString('en-US')}</time>
+    <i><time datetime="${entry.updated.toISOString().substring(0, 10)}"></time></i>
     <summary>${md(entry.content.value)}</summary>
   </article>
 `
@@ -14,21 +13,18 @@ const style = html`
     @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
     :root {
       min-height: 100%;
-      --background: white;
-      --color: #000c;
-      --accent: #e1005d;
-      background: var(--background);
-      color: var(--color);
+      background: #2e3440;
+      color: #eceff4;
       font-family: 'Work Sans', 'Open Sans', sans-serif;
       line-height: 1.5;
     }
     a {
       text-decoration: none;
-      color: var(--accent);
-      opacity: 50%;
+      color: #a3be8c;
     }
     a:hover {
-      opacity: 75%;
+      color: #ebcb8b;
+      opacity: 90%;
     }
     table {
       border-spacing: 0;
@@ -59,24 +55,18 @@ const style = html`
       padding-right: 0.5em;
     }
     main > article > summary a {
+      color: #88c0d0;
       line-break: anywhere;
+    }
+    main > article > summary a:hover {
+      color: #88c0d0;
+      opacity: 90%
     }
     @media (min-width: 600px) {
       main {
         font-size: 18px;
         width: 80ch;
         line-height: 2em;
-      }
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --background: #111;
-        --color: #cccc;
-        --accent: #ff7998;
-        background: var(--background);
-        color: var(--color);
-        font-family: 'Work Sans', 'Open Sans', sans-serif;
-        line-height: 1.5;
       }
     }
   </style>
@@ -101,10 +91,13 @@ export default async function (_) {
       <body>
         <main>
 
-        <div style="display:flex; justify-content:flex-end; align-items:flex-end;">
-        	<div style="flex-grow:1;"><span style="color:#b48ead;">onnyyonn</span>//feed</div></div>
-      		<div ><a class="lni lni-32 lni-github" href="https://github.com/onnyyonn/feed" target="_blank" rel="noopener noreferrer"></a></div>
-    	</div>
+          <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
+		  <section class="header-container">
+		    <div style="display:flex; justify-content:flex-end; align-items:flex-end;">
+		      <div style="flex-grow:1;"><div class="header-title"><span style="color:#b48ead;">onnyyonn</span>//feed</div></div>
+		      <div><a class="lni lni-32 lni-github" href="https://github.com/onnyyonn/feed" style="color:#eceff4;" target="_blank" rel="noopener noreferrer"></a></div>
+		    </div>
+		  </section>
 
         ${feed.entries.map(article).join('\n')}
 
