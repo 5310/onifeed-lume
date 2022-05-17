@@ -96,6 +96,12 @@ export default async function (_) {
         <title>Onnyyonn//feed</title>
         <link rel="icon" href="./favicon.ico" type="image/x-icon" />
         ${style}
+
+        <link
+          rel="alternate"
+          type="application/atom+xml"
+          href="https://rss.0n1.one/public.php?op=rss&id=-2&view-mode=all_articles&key=44ssqy5f0c7a59a8e12"
+        />
       </head>
       <body>
         <main>
