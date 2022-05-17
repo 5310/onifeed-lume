@@ -1,79 +1,125 @@
 import { html, md, fetchFeed } from './util.js'
 
 const article = (entry) => html`
-  <article>
+  <article class="article-entry">
     <h1><a href="${entry.links[0].href}">${entry.title.value}</a></h1>
-    <p style="color:#d8dee9"><font size="-0.4"><i><time datetime="${entry.updated.toISOString()}">${entry.updated.toISOString().substring(0, 10)}</time></i></font></p>
+    <p class="lead">
+      <time datetime="${entry.updated.toISOString()}">
+        ${entry.updated.toISOString().substring(0, 10)}
+      </time>
+    </p>
     <summary>${md(entry.content.value)}</summary>
   </article>
 `
 
 const style = html`
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap');
+    @import url('https://cdn.lineicons.com/2.0/LineIcons.css');
     :root {
+      --palette--polar-night: #2e3440;
+      --palette--snow-storm: #eceff4;
+      --palette--frost: #88c0d0;
+      --palette--aurora-purple: #b48ead;
+      --palette--aurora-green: #a3be8c;
+      --palette--aurora-yellow: #ebcb8b;
+      --palette--aurora-orange: #d08770;
+      --palette--aurora-red: #bf616a;
+
       min-height: 100%;
-      background: #2e3440;
-      color: #eceff4;
+      background: var(--palette--polar-night);
+      color: var(--palette--snow-storm);
       font-family: 'Work Sans', 'Open Sans', sans-serif;
       line-height: 1.5;
     }
-    .header-container {
-      width: 100%;
-      margin: 0 auto;
-    }
-    .header-title {
-      font-size: 32px;
-      font-weight: bold;
+
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
     }
+
     a {
       text-decoration: none;
-      color: #a3be8c;
+      color: var(--palette--aurora-green);
     }
     a:hover {
-      color: #ebcb8b;
+      color: var(--palette--aurora-yellow);
       opacity: 90%;
     }
-    table {
-      border-spacing: 0;
-      border-collapse: collapse;
-    }
-    *:where(p) {
+
+    p {
       margin-block: 0.5em;
+      line-break: anywhere;
     }
-    *:where(h1, h2, h3, h4, h5, ol, ul) {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
       margin-block: 0.5em;
       line-height: 1.2;
     }
+
+    ol,
+    ul {
+      margin-block: 0.5em;
+      line-height: 1.2;
+    }
+
     body {
       display: grid;
-      place-items: center;
       padding: 2em;
+      gap: 1em;
     }
+
+    header {
+      display: flex;
+      gap: 1em;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 0.025em;
+      font-size: 1.2em;
+      font-variation-settings: 'wght' 450;
+    }
+    header .header--title .header--title--accent {
+      color: var(--palette--aurora-purple);
+    }
+    header .header--github a {
+      color: var(--palette----palette--snow-storm);
+      font-size: 1.5em;
+      opacity: 50%;
+    }
+
     main {
       display: grid;
       gap: 1em;
       place-items: stretch;
     }
-    main > article > table {
-      font-size: 0.75em;
-      text-align: left;
+
+    .article-entry .article-entry--lead {
+      font-style: italic;
+      font-size: 0.85em;
+      opacity: 75%;
     }
-    main > article > table th {
-      padding-right: 0.5em;
-    }
-    main > article > summary a {
-      color: #88c0d0;
+    .article summary a {
+      color: var(--palette--frost);
       line-break: anywhere;
     }
-    main > article > summary a:hover {
-      color: #88c0d0;
-      opacity: 90%
+
+    @media (max-width: 400px) {
+      :root {
+        font-size: 4vw;
+      }
     }
-    @media (min-width: 600px) {
-      main {
+    @media (min-width: 120ch) {
+      :root {
         font-size: 18px;
+      }
+      main {
         width: 80ch;
         line-height: 2em;
       }
@@ -93,8 +139,13 @@ export default async function (_) {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
         <title>Onnyyonn//feed</title>
         <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+        <link
+          href="https://cdn.lineicons.com/2.0/LineIcons.css"
+          rel="stylesheet"
+        />
         ${style}
 
         <link
@@ -103,20 +154,24 @@ export default async function (_) {
           href="https://rss.0n1.one/public.php?op=rss&id=-2&view-mode=all_articles&key=44ssqy5f0c7a59a8e12"
         />
       </head>
+
       <body>
-        <main>
+        <header>
+          <h1 class="header--title">
+            <span class="header--title--accent">onnyyonn</span>//feed
+          </h1>
+          <div class="header--github">
+            <a
+              class="lni lni-github"
+              href="https://github.com/onnyyonn/feed"
+              style="color:#eceff4;"
+              target="_blank"
+              rel="noopener noreferrer"
+            ></a>
+          </div>
+        </header>
 
-          <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
-		  <section class="header-container">
-		    <div style="display:flex; justify-content:flex-end; align-items:flex-end;">
-		      <div style="flex-grow:1;"><div class="header-title"><span style="color:#b48ead;">onnyyonn</span>//feed</div></div>
-		      <div><a class="lni lni-32 lni-github" href="https://github.com/onnyyonn/feed" style="color:#eceff4;" target="_blank" rel="noopener noreferrer"></a></div>
-		    </div>
-		  </section>
-
-        ${feed.entries.map(article).join('\n')}
-
-        </main>
+        <main>${feed.entries.map(article).join('\n')}</main>
       </body>
     </html>
   `
