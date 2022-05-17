@@ -1,6 +1,7 @@
 import { markdownIt } from 'https://deno.land/x/lume@v1.8.0/deps/markdown_it.ts'
 import { html as html_ } from 'https://deno.land/x/html@v1.2.0/mod.ts'
 import { parseFeed } from 'https://deno.land/x/rss@0.5.5/mod.ts'
+import { slug } from 'https://deno.land/x/slug@v0.1.1/mod.ts'
 
 const markdownItEngine = markdownIt({
   html: true,
@@ -25,3 +26,5 @@ export const fetchFeed = async (url) => {
   const xml = await response.text()
   return await parseFeed(xml)
 }
+
+export const slugify = slug

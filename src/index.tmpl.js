@@ -1,16 +1,31 @@
-import { html, md, fetchFeed } from './util.js'
+import { html, md, fetchFeed, slugify } from './util.js'
 
-const article = (entry) => html`
-  <article class="article-entry">
-    <h1><a href="${entry.links[0].href}">${entry.title.value}</a></h1>
-    <p class="lead">
-      <time datetime="${entry.updated.toISOString()}">
-        ${entry.updated.toISOString().substring(0, 10)}
-      </time>
-    </p>
-    <summary>${md(entry.content.value)}</summary>
-  </article>
-`
+const article = (entry) => {
+  const title = entry.title.value
+  const slug = slugify(title)
+  const link = entry.links[0].href
+  const timestamp = entry.updated
+  const summary = entry.content.value
+
+  return html`
+    <article class="article-entry" id="${slug}">
+      <h1>
+        <a
+          class="article--permalink lni lni-link"
+          href="#${slug}"
+          rel="noopener noreferrer"
+        ></a>
+        <a href="${link}">${title}</a>
+      </h1>
+      <p class="lead">
+        <time datetime="${timestamp.toISOString()}">
+          ${timestamp.toISOString().substring(0, 10)}
+        </time>
+      </p>
+      <summary>${md(entry.content.value)}</summary>
+    </article>
+  `
+}
 
 const style = html`
   <style>
@@ -60,6 +75,7 @@ const style = html`
     h5 {
       margin-block: 0.5em;
       line-height: 1.2;
+      letter-spacing: 0.02em;
     }
 
     ol,
@@ -100,6 +116,14 @@ const style = html`
       place-items: stretch;
     }
 
+    .article-entry .article--permalink {
+      font-size: 0.75em;
+      float: left;
+      margin-top: 0.33em;
+      margin-left: -1.4em;
+      font-weight: bold;
+      opacity: 25%;
+    }
     .article-entry .article-entry--lead {
       font-style: italic;
       font-size: 0.85em;
@@ -118,6 +142,9 @@ const style = html`
     @media (min-width: 120ch) {
       :root {
         font-size: 18px;
+      }
+      body {
+        padding: 4em;
       }
       main {
         width: 80ch;
