@@ -3,7 +3,7 @@ import { html, md, fetchFeed } from './util.js'
 const article = (entry) => html`
   <article>
     <h1><a href="${entry.links[0].href}">${entry.title.value}</a></h1>
-    <i><time datetime="${entry.updated.toISOString()">${entry.updated.toISOString().substring(0, 10)}</time></i>
+    <i><time datetime="${entry.updated.toISOString()}">${entry.updated.toISOString().substring(0, 10)}</time></i>
     <summary>${md(entry.content.value)}</summary>
   </article>
 `
